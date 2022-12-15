@@ -7,6 +7,7 @@ grand_parent: Notes
 
 ## Cargo
 ### Useful Commands
+<html>
 <table>
 <tr>
     <td>
@@ -73,6 +74,7 @@ grand_parent: Notes
     </td>
 </tr>
 </table>
+</html>
     
 ### Cargo.toml
 Is the build file for rust and includes the package name, version and edition. As well as optional dependencies and everything that dependency is fetched from [Crates.io](https://crates.io/) and built as well when we build our package.
