@@ -72,6 +72,7 @@ grand_parent: Notes
         Locally builds a documentation of all included dependencies and opens them in the browser
     </td>
 </tr>
+</table>
     
 ### Cargo.toml
 Is the build file for rust and includes the package name, version and edition. As well as optional dependencies and everything that dependency is fetched from [Crates.io](https://crates.io/) and built as well when we build our package.
