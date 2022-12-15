@@ -5,8 +5,8 @@ parent: Rust
 grand_parent: Notes
 ---
 
-## Cargo
-### Useful Commands
+<h2>Cargo</h2>
+<h3>Useful Commands</h3>
 <html>
 <table>
 <tr>
@@ -75,11 +75,11 @@ grand_parent: Notes
 </tr>
 </table>
 </html>
-    
-### Cargo.toml
-Is the build file for rust and includes the package name, version and edition. As well as optional dependencies and everything that dependency is fetched from [Crates.io](https://crates.io/) and built as well when we build our package.
 
-```toml
+<h3>Cargo.toml</h3>
+<p>Is the build file for rust and includes the package name, version and edition. As well as optional dependencies and everything that dependency is fetched from [Crates.io](https://crates.io/) and built as well when we build our package.</p>
+
+<code>
 [package]
 name = "example_project"
 version = "0.1.0"
@@ -87,9 +87,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
 rand = "^0.8.3"
-```
+</code>
 
-`"0.8.3" = "^0.8.3"`: All version from **0.8.3** up to but not including **0.9.0** (*might contain breaking API changes*)
+<p><code>"0.8.3" = "^0.8.3"</code>: All version from **0.8.3** up to but not including **0.9.0** (*might contain breaking API changes*)</p>
 
-### Cargo.lock
-When rebuilding a project, this file will be used to get the saved versions instead of trying to figure out the newest versions again. Meaning the package will stay in the specified version until it is explicitly upgraded. With `cargo update` explained above.
+<h3>Cargo.loc</h3>
+<p>When rebuilding a project, this file will be used to get the saved versions instead of trying to figure out the newest versions again. Meaning the package will stay in the specified version until it is explicitly upgraded. With <code>cargo update</code> explained above.</p>
