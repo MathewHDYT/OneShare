@@ -7,15 +7,15 @@ grand_parent: Notes
 
 ## Cargo
 ### Useful Commands
-| Command                    | Does                                                                                                                |
-|----------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **COMMAND**                | **DESCRIPTION**                                                                                                     |
+| ---------------------------| --------------------------------------------------------------------------------------------------------------------|
 | `cargo --version`          | Returns the currently installed version number of rust if installed (comes with cargo preinstalled)	               |
 | `cargo new <projectname>`  | Creates a new project and git repo with the given name. <br/> **Add --vcs=git to not create a new git repo**        |
-| `cargo build`              | Creates an executable file in **target/debug/<projectname>.exe**. <br/> Run with **.\target\debug\<projectname>.exe**. <br/> To build for release use **--release**                                                                                                                                      |
+| `cargo build`              | Creates an executable file in **target/debug/<projectname>.exe**. <br/> Run with **.\target\debug\<projectname>.exe**. <br/> To build for release use **--release**                                                                                                                      |
 | `cargo run`                | Both compiles code and runs the resulting executable                                                                |
-| `cargo update`             | Searches for newer version of the specified dependencies and updates the **Cargo.lock** file accordingly. <br/> (To update to the next minor version 0.X.0, the **Cargo.lock** file has to be changed by hand)                                                         |
+| `cargo update`             | Searches for newer version of the specified dependencies and updates the **Cargo.lock** file accordingly. <br/> (To update to the next minor version 0.X.0, the **Cargo.lock** file has to be changed by hand)                                                                            |
 | `cargo doc --open`         | Locally builds a documentation of all included dependencies and opens them in the browser                           |
-
+  
 ### Cargo.toml
 Is the build file for rust and includes the package name, version and edition. As well as optional dependencies and everything that dependency is fetched from [Crates.io](https://crates.io/) and built as well when we build our package.
 
