@@ -79,8 +79,7 @@ grand_parent: Notes
 <h3>Cargo.toml</h3>
 <p>Is the build file for rust and includes the package name, version and edition. As well as optional dependencies and everything that dependency is fetched from [Crates.io](https://crates.io/) and built as well when we build our package.</p>
 
-<pre>
-<code class="lang-toml">
+<pre><code class="lang-toml">
 [package]
 name = "example_project"
 version = "0.1.0"
@@ -88,10 +87,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
 rand = "^0.8.3"
-</code>
-</pre>
+</code></pre>
 
 <p><code>"0.8.3" = "^0.8.3"</code>: All version from <b>0.8.3</b> up to but not including <b>0.9.0</b> (<i>might contain breaking API changes</i>)</p>
 
-<h3>Cargo.loc</h3>
+<h3>Cargo.lock</h3>
 <p>When rebuilding a project, this file will be used to get the saved versions instead of trying to figure out the newest versions again. Meaning the package will stay in the specified version until it is explicitly upgraded. With <code>cargo update</code> explained above.</p>
