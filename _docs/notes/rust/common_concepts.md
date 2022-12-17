@@ -51,18 +51,18 @@ Signed / unsigned refers to whether the number can represent negative values.
 
 **n**: Represents the amount of bits that variant uses
 
-**Signed size**: $ -(2^n−1) $ to $ (2^n−1) - 1 $
+**Signed size**: -(2^n−1) to (2^n−1) - 1
 
-**Unsigned size**: $ 0 $ to $ (2^n) - 1 $
+**Unsigned size**: 0 $ to (2^n) - 1
 
 Length | Signed | Unsigned |
  ----- | ------ | -------- |
-8-bit  | `i8`     | `u8`       | 
-16-bit | `i16`    | `u16`      |
-32-bit | `i32`    | `u32`      |
-64-bit | `i64`    | `u64`      |
-128-bit| `i128`   | `u128`     |
-arch[^1]| `isize` | `usize`    |
+8-bit  | `i8`     | `u8`   | 
+16-bit | `i16`    | `u16`  |
+32-bit | `i32`    | `u32`  |
+64-bit | `i64`    | `u64`  |
+128-bit| `i128`   | `u128` |
+arch[^1]| `isize` | `usize`|
 
 [^1]: Used architecture of pc 32-bit or 64-bit 
 
@@ -91,7 +91,8 @@ Length | Signed |
 Two possible values true and false, 1-bit in size. Defined with bool. 
 
 #### Character Type
-Defined with char, 32-bit in size. char literals are specified 'c', opposed to string literals, which use "string". Represents a Unicode scalar value, range from U+0000 to U+D7FF and U+E000 to U+10FFFF inclusive. 
+Defined with `char`, 32-bit in size. char literals are specified `'c'`, opposed to string literals, which use `"string"`.
+Represents a Unicode scalar value, range from `U+0000` to `U+D7FF` and `U+E000` to `U+10FFFF` inclusive. 
 
 ### Compound Types
 Can group multiple values into one type. 
