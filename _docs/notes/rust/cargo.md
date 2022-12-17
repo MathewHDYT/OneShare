@@ -6,6 +6,7 @@ grand_parent: Notes
 ---
 
 <h2>Cargo</h2>
+<p>Contains information about what cargo is and how to use it correctly.</p>
 <h3>Useful Commands</h3>
 <html>
 <table>
