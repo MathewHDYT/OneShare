@@ -55,7 +55,7 @@ Signed / unsigned refers to whether the number can represent negative values.
 
 **Unsigned size**: 0 $ to (2^n) - 1
 
-Length | Signed | Unsigned |
+**LENGTH** | **SIGNED** | **UNSIGNED** |
  ----- | ------ | -------- |
 8-bit  | `i8`     | `u8`   | 
 16-bit | `i16`    | `u16`  |
@@ -66,7 +66,7 @@ arch[^1]| `isize` | `usize`|
 
 [^1]: Used architecture of pc 32-bit or 64-bit 
 
-Number literals | Example |
+**NUMBER LITERALS** | **EXAMPLE** |
  -----          | ------  |
 Decimal | `98_222` |
 Hex | `0xff` |
@@ -82,7 +82,7 @@ Numbers with decimal points.
 All floating-point types are signed and a floating-point number is 64-bit per default.
 
 
-Length | Signed |
+**LENGTH** | **SIGNED** |
  ----- | ------ |
 32-bit | f32 |
 64-bit | f64 |
