@@ -53,7 +53,7 @@ Signed / unsigned refers to whether the number can represent negative values.
 
 **Signed size**: -(2^n−1) to (2^n−1) - 1
 
-**Unsigned size**: 0 $ to (2^n) - 1
+**Unsigned size**: 0 to (2^n) - 1
 
 **LENGTH** | **SIGNED** | **UNSIGNED** |
  ----- | ------ | -------- |

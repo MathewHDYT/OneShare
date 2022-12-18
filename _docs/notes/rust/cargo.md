@@ -14,7 +14,7 @@ Contains information about what cargo is and how to use it correctly.
 -------------------- | ---------------------------------------------------------------- |
 `cargo --version`    | Returns the currently installed version number of rust if installed (comes with cargo preinstalled) |
 `cargo new <projectname>` | Creates a new project and git repo with the given name. **Add --vcs=git to not create a new git repo** |
-`cargo build` | Creates an executable file in **target/debug/.exe**. Run with **.\\target\\debug\\<projectname>.exe**. To build for release use **\--release** |
+`cargo build` | Creates an executable file in **target/debug/.exe**. Run with **./target/debug/<projectname>.exe**. To build for release use **/--release** |
 `cargo run` | Both compiles code and runs the resulting executable |
 `cargo update` | Searches for newer version of the specified dependencies and updates the **Cargo.lock** file accordingly. (To update to the next minor version 0.X.0, the **Cargo.lock** file has to be changed by hand) |
 `cargo doc --open` | Locally builds a documentation of all included dependencies and opens them in the browser |
