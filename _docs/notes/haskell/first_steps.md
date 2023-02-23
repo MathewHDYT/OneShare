@@ -1,11 +1,12 @@
 ---
 layout: default
-title: Introduction
+title: First steps
 parent: Haskell
 grand_parent: Notes
 ---
 
-## Introduction
+## First steps
+Relevant content from Chapter 2 of [Programming in Haskell 2nd Edition](https://www.cambridge.org/us/academic/subjects/computer-science/programming-languages-and-applied-logic/programming-haskell-2nd-edition)
 
 ### Glasgow Haskell Compiler
 [GHC](https://www.haskell.org/platform/) is the leading implementation of Haskell, and compromises both a compiler and interpreter.
