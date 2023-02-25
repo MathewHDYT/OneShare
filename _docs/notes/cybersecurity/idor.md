@@ -21,7 +21,9 @@ and the given input is not validated for wheter the user should in fact have acc
 
 Is data passed in the URL when making a request to a website. For example this domain.
 
-<https://website.thm/profile?id=23>
+```
+https://website.thm/profile?id=23
+```
 
 It consists of the **Protocol** --> `https://`, the **Domain** --> `website.thm`, the **Page** --> `/profile` and the **Query Component** --> `?id=23`
 
