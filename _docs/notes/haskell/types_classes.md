@@ -75,13 +75,77 @@ Tuples `(T1)` of `arity` one, however are not permitted, because they would conf
 Type of tuple `(Bool, Char)` conveys its `arity`. Furthermore there are no restrictions on types of components.
 
 ```haskell
-(`a`, (False, `b`)) :: (Char, (Bool, Char))
-([`a`, `b`], [False, True]) :: ([Char], [Bool])
-[(`a`, False), (`b`, True)] :: [(Char, Bool)]
+('a', (False, 'b')) :: (Char, (Bool, Char))
+(['a', 'b'], [False, True]) :: ([Char], [Bool])
+[('a', False), ('b', True)] :: [(Char, Bool)]
 ```
 
 Tuples must have a finite `arity`, in order to ensure tuple types can be inferred priot to evaluation.
 
 ### Function types
 
+Function is a mapping `T1 -> T2` from `arguments` of one type to `results` of anyother type.
+
+Simpe way to handle the case of multiple `arguments` and results, is by packaging multiple values using a `list` or `tuple`,
+this is possible because there are no restrictions on the types of `arguments` and `results`.
+
+There is no restriction that functions must be `total` on their argument type,
+meaning there may be some arguments for which the result is not defined.
+
+```haskell
+> head []
+*** Exception: Prelude.head: empty list
+```
+
+### Curried functions
+
+Functions with multiple arguments can also be handled in another way.
+More specifically by explotiting the fact that functions are free to return functions as results.
+
+Consider the following definition:
+
+```haskell
+add :: (Int, Int) -> Int
+add' :: Int -> (Int -> Int)
+add' x y = x + y
+```
+
+The type state it is a function that takes an `argument` of type `Int` and returns a result that is a function of type `Int -> Int`.
+More precisely it states that it takes an `Int` followed by another `Int` and returns the result of both `Int` combined.
+
+The function `add` produces the same final result as `add'`, but `add` takes the two arguments packaged as a `pair` at once, `add'` takes them one at a time.
+
+---------
+
+Functions with more than just two arguments can be handled using the same way.
+
+```haskell
+-- 3 Arguments, 1 Result
+mult :: Int -> (Int -> (Int -> Int))
+mult x y z = x * y * z
+```
+
+These types of functions are called `curried functions`, the main advantage are that they are more flexible than their Tuple / List counterpart.
+That is mainly because a `curried function` with only a partially filling the needed arguments and using that in combination with another function.
+
+Furthemore excess parantheses can be dropped, because the function arrow `->` assumes association to the right.
+
+```haskell
+-- Explicit
+:: Int -> (Int -> (Int -> Int))
+-- Implicit
+:: Int -> Int -> Int -> Int
+```
+
+Consequently function application, using spacing is assumed to associate to the left and unless tupling is explicitly required,
+all functions with multiple arguments are normally defined as `curried functions`.
+
+```haskell
+-- Explicit
+((mult x) y) z
+-- Implicit
+mult x y z
+```
+
+### Polymorphic types
 
