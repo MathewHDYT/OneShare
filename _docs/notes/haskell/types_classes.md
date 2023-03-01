@@ -149,3 +149,23 @@ mult x y z
 
 ### Polymorphic types
 
+To use a function on any element, irrespective of type, `polymorphic types` can be used.
+
+```haskell
+> length [1, 3, 5, 7]
+4
+
+> length ["Yes", "No"]
+2
+
+> length [sin, cos, tan]
+3
+```
+
+This is done by the inclusion of a `type variable`. These must begin with a lower-case letter, usually simply named `a`, `b`, `c`, ... for example type of `length` is as follows.
+
+```haskell
+length :: [a] -> Int
+```
+
+For any type `a`, the function
