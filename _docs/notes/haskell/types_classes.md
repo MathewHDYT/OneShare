@@ -185,12 +185,13 @@ A type / expression that contains one or more `class constraints` is called `ove
 
 ### Basic classes
 
-A class is a collection of types that support certain overloaded operations called methods.
-All classes mentioned below are instanced by all basic types `Bool`, `Char`, `String`, `Int`, `Integer`, `Float` and `Double` as well as `list` and `tuple`.
+Class is a collection of types that support certain overloaded operations called `methods`.
+All classes mentioned below (besides `Num`, `Integral`, `Fractional`) can be instanced by all basic types `Bool`, `Char`, `String`, `Int`, `Integer`, `Float` and `Double` as well as `list` and `tuple`.
 
 #### Eq - equality types
+
 Types whose values can be compared for equality and inequality.
-Function types are **not** instances of the Eq class.
+Function types are **not** instances of the `Eq` class.
 
 ```haskell
 (==) :: a -> a -> Bool
@@ -198,7 +199,8 @@ Function types are **not** instances of the Eq class.
 ```
 
 #### Ord - ordered types
-Types that are instances of the Eq class and in addition whose values are totally (linearly) ordered.
+
+Types that are instances of the `Eq` class and in addition whose values are totally (linearly) ordered.
 
 ```haskell
 (<) :: a -> a -> Bool
@@ -209,16 +211,76 @@ min :: a -> a -> a
 max :: a -> a -> a
 ```
 
+Note `String`, `list` and `tuple` are ordered `lexicographically`.
+In order if their first components are in order, then the second components are not considered, else their second components must be in order.
+
 #### Show - showable types
+
 Types whose values can be converted into strings of characters.
 
 ```haskell
 show :: a -> String
 ```
 
-#### Read -readable types
+#### Read - readable types
+
 Types whose values can be converted from strings of characters.
 
 ```haskell
 read :: a -> String
+```
+
+The type can sometimes not be infereed by GHCi, therefore adding the type hints can be useful.
+
+```haskell
+> read "('a'. False)" :: (Char, Bool)
+```
+
+#### Num - numeric types
+
+Types whose values are numeric.
+
+```haskell
+(+) :: a -> a -> a
+(-) :: a -> a -> a
+(*) :: a -> -> a
+negate :: a -> a
+abs :: a -> a
+signum :: a -> a
+```
+
+Only the basic tyoes `Int`, `Integer`, `Float`, `Double` are instances of `Num`.
+
+Furthermore negative numbers must be paranthesised, when used as arguments, to ensure correct interpretation of the minus sign.
+
+```haskell
+> signum (-3)
+```
+
+#### Integral - integral types
+
+Types that are instances of `Num`  and support integer division and integer remainder. (`Int`, `Integer`)
+
+```haskell
+div :: a -> a -> a
+mod :: a -> a -> a
+```
+
+Methods mentioned above are often called like this.
+
+```haskell
+> 7 `div` 2
+3
+
+> 7 `mod` 2
+1
+```
+
+#### Fractional - fractional types
+
+Types that are instances of `Num`  and support fractional division and fractional reciprocation. (`Float`, `Double`)
+
+```haskell
+(/) :: a -> a -> a
+recip :: a -> a
 ```
