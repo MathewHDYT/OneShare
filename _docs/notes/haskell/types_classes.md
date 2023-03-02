@@ -182,3 +182,43 @@ These are written in the form `C a`, where `C` is the anem of a class and `a` is
 
 In other words for any type `a` that is an `instance` of class `Num` the function `(+)` has type `a -> a -> a`.
 A type / expression that contains one or more `class constraints` is called `overloaded.
+
+### Basic classes
+
+A class is a collection of types that support certain overloaded operations called methods.
+All classes mentioned below are instanced by all basic types `Bool`, `Char`, `String`, `Int`, `Integer`, `Float` and `Double` as well as `list` and `tuple`.
+
+#### Eq - equality types
+Types whose values can be compared for equality and inequality.
+Function types are **not** instances of the Eq class.
+
+```haskell
+(==) :: a -> a -> Bool
+(/=) :: a -> a -> Bool
+```
+
+#### Ord - ordered types
+Types that are instances of the Eq class and in addition whose values are totally (linearly) ordered.
+
+```haskell
+(<) :: a -> a -> Bool
+(<=) :: a -> a -> Bool
+(>) :: a -> -> Bool
+(>=) :: a -> a -> Bool
+min :: a -> a -> a
+max :: a -> a -> a
+```
+
+#### Show - showable types
+Types whose values can be converted into strings of characters.
+
+```haskell
+show :: a -> String
+```
+
+#### Read -readable types
+Types whose values can be converted from strings of characters.
+
+```haskell
+read :: a -> String
+```
