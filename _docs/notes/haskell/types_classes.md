@@ -168,4 +168,17 @@ This is done by the inclusion of a `type variable`. These must begin with a lowe
 length :: [a] -> Int
 ```
 
-For any type `a`, the function
+For any type `a`, the function `length` has type `[a] -> Int`. A type that contians one or more type variables is called `polymorphic`.
+Hence `[a] -> Int` is a `polymorphic` type / length is a `polymorphic` function.
+
+### Overloaded types
+
+To restrict `polymorphic types` to certain needed features and functionality `class constraint` can be used.
+These are written in the form `C a`, where `C` is the anem of a class and `a` is a type variable.
+
+```haskell
+(+) :: Num a => a -> a -> a
+```
+
+In other words for any type `a` that is an `instance` of class `Num` the function `(+)` has type `a -> a -> a`.
+A type / expression that contains one or more `class constraints` is called `overloaded.
