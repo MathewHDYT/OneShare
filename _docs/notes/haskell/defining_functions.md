@@ -98,3 +98,4 @@ True && True = True
 _    && _    = False
 ```
 
+This version has the benefit that under `lazy evaluation` 
