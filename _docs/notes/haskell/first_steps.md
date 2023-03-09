@@ -13,7 +13,7 @@ Relevant content from Chapter 2 of [Programming in Haskell 2nd Edition](https://
 
 ### Starting GHCi
 
-The interpreter can be started simply from the terminal command promt `$` by simply typing `ghci`
+The interpreter can be started simply from the terminal command prompt `$` by simply typing `ghci`
 
 ```haskell
 $ ghci
@@ -21,7 +21,7 @@ GHCi, version 9.2.5: https://www.haskell.org/ghc/  :? for help
 Prelude>
 ```
 
-GHCi promt `>` means that the interpreter is now ready to evaluate an expression
+GHCi prompt `>` means that the interpreter is now ready to evaluate an expression
 
 It can now be used as a desktop calculator to evaluate simple numeric expressions
 
@@ -36,9 +36,9 @@ It can now be used as a desktop calculator to evaluate simple numeric expression
 5.0
 ```
 
-### The Standard Preulde
+### The Standard Prelude
 
-Haskell comes with a large number of standard library functions.
+Haskell comes with numerous standard library functions.
 
 Including but not limited to numeric functions such as +, *, ^ as well as useful functions on lists.
 
@@ -83,14 +83,14 @@ Including but not limited to numeric functions such as +, *, ^ as well as useful
 120
 ```
 
-### Function Appliction Syntax
+### Function Application Syntax
 
 **TYPE**          | **MATHEMATICS**          | **HASKELL**                                                  |
 -------------------- | -------------------- | -------------------- |
-**FUNCTION APPLICATION** | Parantheses `f(a,b)`    | Space `f a b` |
+**FUNCTION APPLICATION** | Parenthesis `f(a,b)`    | Space `f a b` |
 **MULTIPLICATION** | Juxtaposition `cd` / Space `c d` | Multiplication symbol `c * d`  |
 
-Moreover in Haskell function application is assumed to have higher priority than all other operators.
+Moreover, in Haskell function application is assumed to have higher priority than all other operators.
 
 `f a + b` denotes `(f a) + b` not `f (a + b)`
 
@@ -106,7 +106,7 @@ Moreover in Haskell function application is assumed to have higher priority than
 
 As well as functions in the standard library, it is also possible to define your own functions.
 
-Theese are defined with a script (`.hs`), which is a text file comprosiing a sequence of definitions.
+These are defined with a script (`.hs`), which is a text file compromising a sequence of definitions.
 
 To start the created script GHCi can be used
 
@@ -114,7 +114,7 @@ To start the created script GHCi can be used
 $ ghci test.hs
 ```
 
-Now the standard file is loaded and its methods can be used. Once the file has been changed it has to be reloaded, because GHCi does not automatically detect that the script has been changed.
+Now the standard file is loaded, and its methods can be used. Once the file has been changed it has to be reloaded, because GHCi does not automatically detect that the script has been changed.
 
 To do that the reload command must be executed before the newly added or changed definitions can be used.
 
@@ -162,7 +162,7 @@ c = 10
 ```
 This avoids the need for explicit braces and semicolons.
 
-Implicit grouping (Identation and white spaces relevant):
+Implicit grouping (Indentation and white spaces relevant):
 
 ```haskell
 a = b + c
@@ -172,7 +172,7 @@ a = b + c
 d = a * 2
 ```
 
-Explicit grouing (With layout expanded, identation and white spaces not relevant)
+Explicit grouping (With layout expanded, indentation and white spaces not relevant)
 
 ```haskell
 a = b + c

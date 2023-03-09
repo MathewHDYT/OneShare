@@ -10,7 +10,7 @@ Relevant content from Chapter 4 of [Programming in Haskell 2nd Edition](https://
 
 ### New from old
 
-Easiest way to define a new functon is to use already exisiting ones.
+Easiest way to define a new function is to use already existing ones.
 
 ```haskell
 even :: Integral a => a -> Bool
@@ -26,7 +26,7 @@ recip n = 1 / n
 ###  Conditional expressions
 
 Haskell provides multiple ways to define functions, that choose between a number of possible results.
-The simplest are `conditional expressions`, which use a logical expression called `condition` to choose between between two results of the same type.
+The simplest are `conditional expressions`, which use a logical expression called `condition` to choose between two results of the same type.
 If the `condition` is `True`, the first result is chosen, if it is `False` then the second result is chosen instead.
 
 ```haskell
@@ -54,8 +54,8 @@ abs n | n >= 0    = -1
       | otherwise =  1
 ```
 
-The symboy `|` os read as *such that* and the guard `otherwise` is defined in the standard prelude by `otherwise = True`.
-Ending a sequence of quards with `otherwise` is not necessary, but provides a convenient way of handling all remaining cases,
+The symbol `|` is read as *such that* and the guard `otherwise` is defined in the standard prelude by `otherwise = True`.
+Ending a sequence of guards with `otherwise` is not necessary, but provides a convenient way of handling all remaining cases,
 as well as avoiding that none of the guards in the sequence is `True`, which results in an error.
 
 Main benefit of `guarded equations` over `conditional expressions` is that multiple guards are easier to read.
@@ -112,5 +112,70 @@ True  && b = b
 False && _ = False
 ```
 
-Note that using the same name to be used for more than one argument in a single equation is 
+Note that using the same name to be used for more than one argument in a single equation is not permitted.
+
+### Tuple patterns
+
+Is a pattern, that matches any tuple of the same `arity`,
+whose component all match the corresponding patterns in order.
+
+The library functions `fst` and `snd`, they respectively select the first and second components of a pair.
+
+```haskell
+fst :: (a, b) -> a
+fst (x, _) = x
+
+snd :: (a, b) -> b
+snd (_, y) = y
+```
+
+### List patterns
+
+Is a pattern, that matches any list of the same `length`,
+whose elements all match the corresponding patterns in order.
+
+The function below called `test` decides if a list contains precisely three characters beginning with the letter `a`.
+
+```haskell
+test :: [Char] -> Bool
+test [`a`, _, _] = True
+test _           = False
+```
+
+Lists are not primitive as such, but are instead constructed one element at a time.
+
+Starting from the empty list `[]` using an operator `:` called *cons* that *con*structs a new list by prepending a new element to the start of an existing list.
+
+```haskell
+[1, 2, 3]
+= {list notation}
+1 : [2, 3]
+= {list notation}
+1 : (2 : [3])
+= {list notation}
+1 : (2 : (3 : []))
+```
+
+Meaning `[1, 2, 3]` is an abbreviation for `1 : (2 : (3 : []))`. The *cons* operator is assumed to operate to the right.
+`1 : 2 : 3 : []` means `1 : (2 : (3 : []))`.
+
+The *cons* operator can be used to construct patterns, which match any non-empty list whose first and remaining elements match the corresponding patterns in order.
+
+```haskell
+test :: [Char] -> Bool
+test (`a`:_) = True
+test _         = False
+
+head :: [a] -> a
+head (x:_) = x
+
+tail :: [a] -> [a]
+tail (_:xs) = xs
+```
+
+*Cons* patterns must be parenthesized, because function application has a higher priority than all other operators.
+
+### Lambda expression
+
+
 
