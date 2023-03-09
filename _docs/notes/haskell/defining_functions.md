@@ -98,4 +98,19 @@ True && True = True
 _    && _    = False
 ```
 
-This version has the benefit that under `lazy evaluation` 
+This version has the benefit that under `lazy evaluation`, if the first argument is `False`, then the second one does not need to be evaluated.
+
+```haskell
+True  && True = True
+False && _    = False
+```
+
+Prelude defines `&&` like this, that is if the first argument is `True`, then the result is the value of the second argument. If the argument is `False` then the result is `False`.
+
+```haskell
+True  && b = b
+False && _ = False
+```
+
+Note that using the same name to be used for more than one argument in a single equation is 
+
