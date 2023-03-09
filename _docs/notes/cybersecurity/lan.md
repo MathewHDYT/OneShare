@@ -11,12 +11,12 @@ grand_parent: Notes
 
 Means `Local Area Network` (`LAN`).
 Over the years, there has been experimentation and implementation of various **network** designs.
-One of that aspect is the **topology**, which referes to the design or look of the **network**.
+One of that aspect is the **topology**, which refers to the design or look of the **network**.
 These include but are not limited to:
 
 ### Star Topology:
 
-The main premise is that devices ar individually connected via a central networking device such as a **switch** or **hub**.
+The main premise is that devices are individually connected via a central networking device such as a **switch** or **hub**.
 It is the most commonly found today because of its reliability and scalability, despite its higher cost.
 
 Therefore, any information sent to a device in this topology is sent via the central device to which it connects.
@@ -25,47 +25,47 @@ Therefore, any information sent to a device in this topology is sent via the cen
 
 **ADVANTAGES** | **DISADVANTAGE** |
 -------------- | ---------------- |
-Higher scalability (easy to add new devices if the need arises). Reduced rate of failure | More expensive. Scaling the network, also increases the maintenance required to keep it functional --> makes troubleshooting faults much harder. Can still fail if the centralised hardware that connectes devices fails |
+Higher scalability (easy to add new devices if the need arises). Reduced rate of failure | More expensive. Scaling the network, also increases the maintenance required to keep it functional --> makes troubleshooting faults much harder. Can still fail if the centralized hardware that connects devices fails |
 
 ### Bus Topology: 
 
 It relies upon a single connection, which is known as a backbone cable.
-This type of topology is similair to the leaf of a tree in the sense that **devices** (leaves) stem from where the branchers are on this cable.
+This type of topology is similar to the leaf of a tree in the sense that **devices** (leaves) stem from where the branches are on this cable.
 
 ![Bus](https://raw.githubusercontent.com/MathewHDYT/OneShare/main/_images/bus.png)
 
 **ADVANTAGES** | **DISADVANTAGE** |
 -------------- | ---------------- |
-Easy and cost-efficient to set up, because of not needed cabling or dedicated networking equipment for connecting the devices | Very quickly prone to become slow and bottlenecked if devices withing the toplogy are simultaneously requesting data. Difficulty to troubleshoot, because it becomes hard to identify which device is experiencing issues with data all traveling along the same route. Little redundancy in case of failure, because of a single point of failure along the backbone cable (if it breaks, all devices can no longer receive or transmit data along the bus) |
+Easy and cost-efficient to set up, because of not needed cabling or dedicated networking equipment for connecting the devices | Very quickly prone to become slow and bottle necked if devices withing the topology are simultaneously requesting data. Difficulty to troubleshoot, because it becomes hard to identify which device is experiencing issues with data all traveling along the same route. Little redundancy in case of failure, because of a single point of failure along the backbone cable (if it breaks, all devices can no longer receive or transmit data along the bus) |
 
 ### Ring Topology:
 
-Also known as **token topology**, boasts some similarites to the **bus topology**.
+Also known as **token topology**, boasts some similarities to the **bus topology**.
 **Devices** such as computers are directly connected to each other to form a loop meaning that there is little cabling required and less dependence on dedicated hardware.
 
 ![Ring](https://raw.githubusercontent.com/MathewHDYT/OneShare/main/_images/ring.png)
 
-It works by sending data across the loop until it reaches the destined **device**, using other devices along the loop to forward the data. Interestingly, a **device** will only send data from another **device** in this topology if it does not have any to send itself. If the **device** happends to have data to send, it will send its own data first before sending data from another **device**. 
+It works by sending data across the loop until it reaches the destined **device**, using other devices along the loop to forward the data. Interestingly, a **device** will only send data from another **device** in this topology if it does not have any to send itself. If the **device** happens to have data to send, it will send its own data first before sending data from another **device**. 
 
 **ADVANTAGES** | **DISADVANTAGE** |
 -------------- | ---------------- |
-Easy and cost-efficient to set up, because of not needed cabling or dedicated networking equipment for connecting the devices. Because there is only one direction for data to travel across, it is fairly easy to torubleshoot any faults. Less prone to bottlöenecks than bus topology, as large amounts of traffic are not travelling across the network at any one time | Inefficient because it may have to visit many multiple devices first befor reaching the intended device. Fault such as a cut cable or broken device will result in the entire networking breaking |
+Easy and cost-efficient to set up, because of not needed cabling or dedicated networking equipment for connecting the devices. Because there is only one direction for data to travel across, it is fairly easy to troubleshoot any faults. Less prone to bottlenecks than bus topology, as large amounts of traffic are not travelling across the network at anyone time | Inefficient because it may have to visit many multiple devices first before reaching the intended device. Fault such as a cut cable or broken device will result in the entire networking breaking |
 
 ### Switch:
 
 Are dedicated **devices** within a **network** that are designed to aggregate multiple other **devices** such as computers, printers, or any other networking-capable device using ethernet, where they plug into a switchs port.
 
-Switches are usually found in larger networks such as businesses, school, or simiolar-sized networks, where there are mayn **devices** to connect to the network.
+Switches are usually found in larger networks such as businesses, school, or similair sized networks, where there are mayn **devices** to connect to the network.
 
-Additionaly **switches** are much more efficient than their lesser counterpart (**hubs** / **repeaters**).
+Additionally, **switches** are much more efficient than their lesser counterpart (**hubs** / **repeaters**).
 They keep track of what device is connected to which part.
-This way, when they receive a packet, instead of repeating that packet to every port like a **hub** would do, it just send it to the intended target, thus reducing **network** traffic.
+This way, when they receive a packet, instead of repeating that packet to every port like a **hub** would do, it just sends it to the intended target, thus reducing **network** traffic.
 
 ![Switches](https://raw.githubusercontent.com/MathewHDYT/OneShare/main/_images/switches.png)
 
 ### Router:
 
-It's job it to connect **networks** and pass data between them. it does so by **routing**.
+It's job it to connect **networks** and pass data between them, it does so by **routing**.
 
 **Routing** is the label given to the process of data travelling across **networks**. It involves creating a path between **networks** so that this data can be successfully delivered. 
 
@@ -75,9 +75,9 @@ It's job it to connect **networks** and pass data between them. it does so by **
 
 ### Subnetting:
 
-Is the term given to splitting up a **network** into smaller, minature networks within itself.
+Is the term given to splitting up a **network** into smaller, miniature networks within itself.
 
-For example a business with different departements such as:
+For example a business with different departments such as:
 - Accounting
 - Finance
 - Human Resources 
@@ -85,7 +85,7 @@ For example a business with different departements such as:
 ![Subnet](https://raw.githubusercontent.com/MathewHDYT/OneShare/main/_images/subnet.png)
 
 A **network** needs to know which department to send the information too.
-Therefore, **network** administartors use subnetting to categorise and assign sepcific parts of a **network**.
+Therefore, **network** administrators use subnetting to categorize and assign specific parts of a **network**.
 
 That is done by splitting up the number of hosts that can fit within the **network**, represented by a number called a **subnet mask**.
 
@@ -103,15 +103,15 @@ Default Gateway | The default gateway address is a special address assigned to a
 
 In small **networks**, creating **subnets** is not needed as there is an unlikely chance that you need more than 254 **devices** connected at one time. 
 
-However in bigger **networks** subnetting can provide a range of benefits including:
+However, in bigger **networks** subnetting can provide a range of benefits including:
 - Efficiency
 - Security
 - Full control 
 
 ### ARP Protocol:
 
-`Adress Resolution Protocol` is responsible for allowing devices to identify themselves on a network. It does that with allowing **devices** to associate their `MAC` address with an **`IP` address** on the **network**.
-Each **device** will additionaly keep a log of the `MAC` addresses associated with other devices.
+`Adress Resolution Protocol` is responsible for allowing devices to identify themselves on a network. It does that with allowing **devices** to associate their `MAC` address with a **`IP` address** on the **network**.
+Each **device** will additionally keep a log of the `MAC` addresses associated with other devices.
 
 When **devices** then wish to communicate with another, they will send a broadcast to the entire network searching for a specific **device**.
 These **devices** can then use the `ARP` protocol to find the `MAC` address of a device for communication.
@@ -124,7 +124,7 @@ To map these two identifiers the `ARP` protocol sends two types of messages:
 - `ARP` Request
 - `ARP` Reply
 
-When an `ARP` request is sent, a message is broadcasted to every other **device** found on a **network** by the **device**, asking wheter or not the **devices** `MAC` address matches the requested **`IP` address**.
+When a `ARP` request is sent, a message is broadcasted to every other **device** found on a **network** by the **device**, asking whether or not the **devices** `MAC` address matches the requested **`IP` address**.
 
 If the **device** does have the requested **`IP` address**, an `ARP` reply is returned to the initial **device**, which then remembers this information within the cache (`ARP` entry).
 
@@ -136,9 +136,9 @@ If the **device** does have the requested **`IP` address**, an `ARP` reply is re
 
 This works when a **device** connects to a **network** and if the **`IP` address** has not been manually assigned already, sends out a request (`DHCP` Discover) to see if any `DHCP` servers are on the **network**.
 
-If there are, the `DHCP` server replies back with an **`IP` address** the **device** could use (`DHCP` Offer).
+If there are, the `DHCP` server replies with a **`IP` address** the **device** could use (`DHCP` Offer).
 The **device** then sends a reply confirming it wants the offered **`IP` address** (`DHCP` Request).
 
-Lastly the `DHCP` server send a reply acknowledging this has been completed and the **device** can start using the **`IP` address** (`DHCP` ACK).
+Lastly the `DHCP` server send a reply acknowledging this has been completed, and the **device** can start using the **`IP` address** (`DHCP` ACK).
 
 ![DHCP](https://raw.githubusercontent.com/MathewHDYT/OneShare/main/_images/dhcp.png)

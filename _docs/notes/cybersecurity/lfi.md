@@ -10,11 +10,11 @@ grand_parent: Notes
 ### Meaning:
 
 `LFI` means `Local File Inclusion` and is a vulnerability found in various web applications that allows attackers to include and read local files on the server.
-These files could contain sensitive data such as cryptographic keys, databases that contain passwords, and other pivate data.
+These files could contain sensitive data such as cryptographic keys, databases that contain passwords, and other private data.
 
 ### Example:
 
-In `PHP` the following functions cause these kind of vulnerabilites:
+In `PHP` the following functions cause this kind of vulnerabilities:
 
 - `include`
 - `require`
@@ -31,7 +31,7 @@ Vulnerable `PHP` code example, which reads a local file allows editing that requ
 
 ### Risks: 
 
-Makes it possible to read senstive data if you have readable permission on files.
+Makes it possible to read sensitive data if you have readable permission on files.
 Also in some cases an LFI vulnerability could be chained to perform `RCE` (`Remote Code Execution`).
 If we can inject or write to a file on the system, we can take advantage of `LFI` to get `RCE`. 
 
@@ -66,7 +66,7 @@ Once you find an entry point, we need to understand how this data could be proce
 **TYPE** | **EXAMPLE** |
 -------- | ----------- |
 Direct file inclusion | /etc/passwd |
-Current directory (number of . varies depeding on web app directory) | .. |
+Current directory (number of . varies depending on web app directory) | .. |
 Bypassing filters | ....// |
 URL encoding | Double encoding |
 
@@ -92,7 +92,7 @@ As a result the page will show our original plain text message. Using this techn
 
 ### LFI to RCE via Log file:
 
-The `LFI` to `RCE` via `PHP` log file is also called a log poisoning attack, it is used to gain remote command execution on the webserver.
+The `LFI` to `RCE` via `PHP` log file is also called a log poisoning attack, it is used to gain remote command execution on the web server.
 The attacker needs to include a malicious payload into services log files such as `Apache`, `SSH`, etc.
 Then the `LFI` vulnerability is used to request the page that includes the malicious payload. 
 

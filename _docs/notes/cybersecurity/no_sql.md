@@ -17,13 +17,13 @@ There are a variety of `NoSQL` databases, including `MongoDB`, `Couchbase`, `Rav
 
 ### Mongo DB structure:
 
-Similar to relational databases (such as `MySQL` and `MSSQL`), `MongoDB` consists of databases, tables, fields but with differnt names where:
+Similar to relational databases (such as `MySQL` and `MSSQL`), `MongoDB` consists of databases, tables, fields but with different names where:
 
-- **Collection** are similar to tables or views in `MySQL` and `MSSQL`
+- **Collections** are similar to tables or views in `MySQL` and `MSSQL`
 - **Documents** are similar to rows or records in `MySQL` and `MSSQL`
 - **Fields** are similar to columns in `MySQL` and `MSSQL`
 
-Documents in `MongoDB` are objecst stored in a format called `BSON`, which supports `JSON` data types for document storing.
+Documents in `MongoDB` are objects stored in a format called `BSON`, which supports `JSON` data types for document storing.
 
 ![Mongo DB](https://raw.githubusercontent.com/MathewHDYT/OneShare/main/_images/mongo_db.png)
 
@@ -37,9 +37,9 @@ Query operators between `MongoDB` and `MySQL`:
 
 **COMMAND** | **DESCRIPTION** |
 ----------- | --------------- |
-`ssh thm@10.10.80.25 -p 2222` | Connecting to the server via. ssh |
+`ssh thm@10.10.80.25 -p 2222` | Connecting to the server via. `ssh` |
 `mongo` | Starting MongoDB |
-`show databases` | Listing all databases that we have in MongoDB on our targert machine |
+`show databases` | Listing all databases that we have in MongoDB on our target machine |
 `use AoC3` | Connecting or creating a database that hasn't been created yet |
 `db.createCollection("users")` | Creating Collection with a given name |
 `db.getCollectionNames()` | Getting all collection names in the given database |
@@ -52,7 +52,7 @@ Query operators between `MongoDB` and `MySQL`:
 
 ### NoSQL Injection:
 
-`NoSQL` injection is a web security vulnerability that allows the attacker to have controle over the database.
+`NoSQL` injection is a web security vulnerability that allows the attacker to have control over the database.
 It happens by sending queries via untrusted and unfiltered web application input, which leads to leaked unauthorized information.
 In addition, the attacker can use the `NoSQL` injection to perform various operations such as modifying data, escalating privileges, `DoS` attacks, and others. 
 
@@ -67,7 +67,7 @@ In addition, the attacker can use the `NoSQL` injection to perform various opera
 
 ### Example NoSQL Injection:
 
-Searches for a **Document** where the username is admin and the password is not xyz.
+Searches for a **Document** where the username is admin and the password is not `xyz`.
 
 ```
 db.users.findOne({username: "admin", password: {"$ne":"xyz"}})

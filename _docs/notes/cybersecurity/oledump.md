@@ -33,7 +33,7 @@ C:\Desktop\Tools>oledump.py Document1.doc
 ```
 
 The letter `M` next to a stream indicates that the stream contains a **VBA Macro**.
-Each stream additionaly has a number and a name to easily select one file for analysis. 
+Each stream additionally has a number and a name to easily select one file for analysis. 
 
 ### Options: 
 
@@ -45,5 +45,5 @@ Each stream additionaly has a number and a name to easily select one file for an
 `-d`, `--dump` | Perform a **RAW** dump |
 `-x`, `--hexdump` | Perform a **HEX** dump |
 `-a`, `--asciidump` | Perform an **ASCII** dump |
-`-S`, `--strings` | Perform a strings dump |
+`-S`, `--strings` | Perform strings dump |
 `-v`, `--vbadecompress` | **VBA** decompression |

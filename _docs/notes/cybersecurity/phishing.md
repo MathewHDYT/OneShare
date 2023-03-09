@@ -11,9 +11,9 @@ grand_parent: Notes
 
 Adversaries may send phishing messages to gain access to victim systems.
 All forms of phishing are electronically delivered social engineering.
-Phishing can be targeted, known as spearphishing. 
+Phishing can be targeted, known as spear phishing. 
 
-In spearphishing, a specific individual, company, or industry will be targeted by the adversary.
+In spear phishing, a specific individual, company, or industry will be targeted by the adversary.
 More generally, adversaries can conduct non-targeted phishing, such as in mass malware spam campaigns.
 
 Adversaries may send victims emails containing malicious attachments or links, typically to execute malicious code on victim systems.

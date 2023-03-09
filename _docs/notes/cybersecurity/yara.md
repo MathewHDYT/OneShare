@@ -10,8 +10,8 @@ grand_parent: Notes
 ### Meaning:
 
 `YARA` is a multi-platform tool for matching patterns of interest in files, to achieve that purpose [Yara rules](https://github.com/InQuest/awesome-yara) are utilized.
-Is is most often used to perform research on malware families and identify malware with similar patterns.
-It can help in categorizing malware in different malware families, and can also be used as a dection aid for malware analysis.
+Is most often used to perform research on malware families and identify malware with similar patterns.
+It can help in categorizing malware in different malware families, and can also be used as a detection aid for malware analysis.
 
 ### Yara rules: 
 
@@ -35,12 +35,12 @@ It start with the world rule followed by the name of the rule.
 
 ### Strings: 
 
-This sections contains all the **strings** we watnt to match in a [Yara rule](https://github.com/InQuest/awesome-yara).
+This section contains all the **strings** we want to match in a [Yara rule](https://github.com/InQuest/awesome-yara).
 A declaration start with a `$` sign, followed by the name we want to assign the **string**.
 
 **Strings** can be either text or a hexadecimal value.
 To define text **strings**, we use double quotes and for hex **strings** we use curly brackets.
-Text **strings** can additionaly use `regular expression` or `regex`, for more complex pattern matching.
+Text **strings** can additionally use `regular expression` or `regex`, for more complex pattern matching.
 
 ### Conditions: 
 
@@ -49,14 +49,14 @@ This section defines the conditions that the file should meet for the rule to de
 **OPERATOR** | **CONDITION** |
 ------------ | ------------- |
 `and` | All statements are true |
-`or` | Any one statement is true |
+`or` | Anyone statement is true |
 `not` | The statement is false |
 
 ### Metadata: 
 
-This section is optional. It starts witht the `meta` keyword.
-It can be used to add additonal information about the rule to help the analyst in their analysis.
-Generally it contains arbitrarily defined indentifiers, and their values, which are universally understood.
+This section is optional. It starts with the `meta` keyword.
+It can be used to add additional information about the rule to help the analyst in their analysis.
+Generally it contains arbitrarily defined identifiers, and their values, which are universally understood.
 
 **Example**: `author`,` description`, and `created`
 
@@ -70,7 +70,7 @@ Giving the `options` here is optional.
 If we run this command as it is, it will return us with the rule name and the file name if the rule is hit.
 If the rule is not hit, it will not return anything.
 
-Additionaly `options` for the [Yara rule](https://github.com/InQuest/awesome-yara) call: 
+Additionally, `options` for the [Yara rule](https://github.com/InQuest/awesome-yara) call: 
 
 **CALL** | **DESCRIPTION** |
 -------- | --------------- |

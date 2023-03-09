@@ -24,11 +24,11 @@ Information is at the core of `OSINT` and that information can be obtained by ty
   - Zeronet
 
 Information used in `OSINT` originates from your digital footprint.
-When conduting `OSINT`, we look at data the target left behind to lead us to the information / objective we are seeking. 
+When conducting `OSINT`, we look at data the target left behind to lead us to the information / objective we are seeking. 
 
 ### OSINT Process Cycle: 
 
-When conduting `OSINT`, each individual and team will have their methodology to approach the task.
+When conducting `OSINT`, each individual and team will have their methodology to approach the task.
 The approach to `OSINT` can be quantified through models and systematic steps to follow.
 
 ![OSINT](https://raw.githubusercontent.com/MathewHDYT/OneShare/main/_images/osint.png)
@@ -72,19 +72,19 @@ Small smaple list of google dorks a complete list can be found [here](https://
 **TERM** | **PURPOSE** | **EXAMPLE** |
 -------- | ----------- | ----------- |
 site | Specifically searches that particular site and lists all the results for that site | `site:"www.google.com"` |
-filetype | Searches for a particular filetype mentioned in the query | `filetype:"pdf"` |
+filetype | Searches for a particular file type mentioned in the query | `filetype:"pdf"` |
 link | Searches for external links to pages | `link:"keyword"` |
 inurl | Searches for a URL matching one of the keywords | `inurl:"keyword"` |
 before/after | Used to search within a particular date range | `(before:2000-01-01 after:2001-01-01)` |
 
 ### OSINT & The Blockchain 
 
-A core principle of blockchain technology and decnentralization is anonymity.
+A core principle of blockchain technology and decentralization is anonymity.
 How can you gather information on a target if they are anonymous? 
 
-Blockchain technology is completly open while still remaining anonymous, this comes with its pros and cons from an `OSINT` perspective, we can quickly identify specific identifiert but linking them can become difficlut. 
+Blockchain technology is completely open while still remaining anonymous, this comes with its pros and cons from a `OSINT` perspective, we can quickly identify specific identifiers but linking them can become difficult. 
 
-Multiple tools aid in exploring the blockain including but not limited to:
+Multiple tools aid in exploring the blockchain including but not limited to:
 - Blocktrail
 - Bitcoin Who's Who
 - Graphsense
@@ -92,7 +92,7 @@ Multiple tools aid in exploring the blockain including but not limited to:
 
 ### Going Deeper 
 
-Each plattform has its unique functionality and tricks that can be used, to get further information and links that may still be publicy accesible but are not easily found. 
+Each platform has its unique functionality and tricks that can be used, to get further information and links that may still be publicly accessible but are not easily found. 
 
 For example **GitHub**, with its version control, which can lead to potential information leaks when not adequately sanitized or monitored. 
 

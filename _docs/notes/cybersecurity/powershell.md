@@ -9,7 +9,8 @@ grand_parent: Notes
 
 ### Meaning:
 
-Enables us to capture input and output of **Windows PowerShell** commands, allowing us to review what happened when. Typically they can be enabled in the **Group Policy**, or alternatively by configuring the **Windows Registry**.
+Enables us to capture input and output of **Windows PowerShell** commands, allowing us to review what happened when.
+Typically, they can be enabled in the **Group Policy**, or alternatively by configuring the **Windows Registry**.
 
 ![Registry](https://raw.githubusercontent.com/MathewHDYT/OneShare/main/_images/registry.png)
 
