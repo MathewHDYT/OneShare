@@ -177,5 +177,96 @@ tail (_:xs) = xs
 
 ### Lambda expression
 
+Allows constructing functions, as an alternative to defining functions.
+Compromises a pattern for each of the arguments, a body that specifies how the result is calculated, but does not give a name to the constructed function itself.
 
+```haskell
+\x -> x + x
+```
 
+The symbol `\` represents the Greek letter `lambda`.
+
+Despite the fact that `lambda expressions` do not have names, they can still be used in the same way as any other function
+
+```haskell
+> (\x -> x + x) 2
+4
+```
+
+Firstly, they can be used to formalize the meaning of `curried function` definitions.
+
+```haskell
+-- Curried function
+add :: Int -> Int -> Int
+add x y = x + y
+-- Lambda expression
+add' :: Int -> (Int -> Int)
+add = \x -> (\y -> x + y)
+```
+
+Makes precise that `add` is a function that takes an integer `x` and returns a function,
+that function in turn takes another integer `y` and returns the result `x + y`.
+
+Secondly, they are useful when defining functions that return functions as results by their very nature, rather than as a consequence of currying.
+
+```haskell
+-- Curried function
+const :: a -> b -> a
+const x _ = x
+-- Lambda expression
+const :: a -> (b -> a)
+const x = \_ -> x
+```
+
+Finally, they can be used to avoid having to name a function that is only referenced once in a program.
+
+```haskell
+odds :: Int -> [Int]
+odds n = map f [0..n-1]
+         where f x = x * 2 + 1
+```
+
+Locally defined function `f` is only referenced once, therefore the definition can be simplified.
+
+```haskell
+odds :: Int -> [Int]
+odds n = map (\x -> x * 2 + 1) [0..n-1]
+```
+
+### Operator sections
+
+Functions that are written between their two arguments (`+`, `*`, ...) are called `operators`.
+Any function with two arguments can be converted into a `operator` by enclosing the name of the function in a single back quote `\``.
+
+The opposite is possible as well any `operator` can be converted into a `curried function` by enclosing the name of the `operator` in parentheses `()`.
+Moreover, this also allows one of the arguments to be included in the parentheses if desired (`(1 +) 2`, `(+ 2) 1`).
+In general this also allows the expressions of the form `(#)`, `(x #)`, and `(# y)`, for arguments `x` and `y` are called `sections`.
+
+```haskell
+(#) = \x -> (\y -> x # y)
+(x #) = \y -> x # y
+(# y) = \x -> x # y
+```
+
+Sections can be used to construct a number of simple but useful functions, in a particular compact way.
+
+```haskell
+(+) = \x -> (\y -> x + y)
+(1+) = \y -> 1 + y
+(1/) = \y -> 1 / y
+(*2) = \x -> x * 2
+(/2) = \x -> x / 2
+```
+
+Furthermore, they are necessary when stating the type of operator, because an operator itself is not a valid expression.
+
+```haskell
+(+) :: Int -> Int -> Int
+```
+
+Finally, they are necessary when using operators as arguments to other functions.
+
+```haskell
+sum :: [Int] -> Int
+sum = foldl (+) 0
+```
