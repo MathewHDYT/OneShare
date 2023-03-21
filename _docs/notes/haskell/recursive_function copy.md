@@ -2,6 +2,7 @@
 layout: default
 title: Recursive functions
 parent: Haskell
+nav_order: 6
 grand_parent: Notes
 ---
 

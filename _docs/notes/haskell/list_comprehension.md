@@ -2,6 +2,7 @@
 layout: default
 title: List comprehension
 parent: Haskell
+nav_order: 5
 grand_parent: Notes
 ---
 

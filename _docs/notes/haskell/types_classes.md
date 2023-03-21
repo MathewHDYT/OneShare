@@ -2,6 +2,7 @@
 layout: default
 title: Types and classes
 parent: Haskell
+nav_order: 3
 grand_parent: Notes
 ---
 

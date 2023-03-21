@@ -2,6 +2,7 @@
 layout: default
 title: First steps
 parent: Haskell
+nav_order: 2
 grand_parent: Notes
 ---
 

@@ -2,6 +2,7 @@
 layout: default
 title: Defining functions
 parent: Haskell
+nav_order: 4
 grand_parent: Notes
 ---
 
