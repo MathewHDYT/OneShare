@@ -11,8 +11,8 @@ Relevant content from Chapter 7 of [Programming in Haskell 2nd Edition](https://
 
 ### Basic concepts
 
-Functions with multiple aguments are usually defined using `currying`.
-That is, arguments are taken one at a time by expliting the fact that cunctions can return functions as results.
+Functions with multiple arguments are usually defined using `currying`.
+That is, arguments are taken one at a time by exploiting the fact that functions can return functions as results.
 
 ```haskell
 add :: Int -> Int -> Int
@@ -59,8 +59,10 @@ map f xs = [f x | x <- xs]
 ["ghi", "def", "abc"]
 ```
 
-Map can be applied to itself to proces nested lists.
+Map can be applied to itself to process nested lists.
 
 ```haskell
 map (map (+ 1))
 ```
+
+
