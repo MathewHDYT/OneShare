@@ -62,7 +62,18 @@ map f xs = [f x | x <- xs]
 Map can be applied to itself to process nested lists.
 
 ```haskell
-map (map (+ 1))
+map (map (+ 1)) [[1, 2, 3], [4, 5]]
+= { applying the outer map }
+[map (+ 1) [1, 2, 3], map (+ 1) [4, 5]]
+= { applying the inner maps }
+[[2, 3, 4], [5, 6]]
 ```
 
+The function `map` can also be defined using recursion
+
+```haskell
+map :: (a -> b) -> [a] -> [b]
+map f [] = []
+map f (x:xs) = f x : map f xs
+```
 
