@@ -69,11 +69,59 @@ map (map (+ 1)) [[1, 2, 3], [4, 5]]
 [[2, 3, 4], [5, 6]]
 ```
 
-The function `map` can also be defined using recursion
+The function `map` can also be defined using recursion.
 
 ```haskell
 map :: (a -> b) -> [a] -> [b]
 map f [] = []
 map f (x:xs) = f x : map f xs
+```
+
+Another useful `higher-order` library funcion is `filter`, wich selects all elements of a list that satisfy a predicate, where a predicate (or property) is a funtion that returns a logical value.
+
+```haskell
+filter :: (a -> Bool) -> [a] -> [a]
+filter p xs = [x | x <- xs, p x]
+```
+
+```haskell
+> filter even [1..10]
+[2, 4, 6, 8, 10]
+
+> filter (> 5) [1..10]
+[6, 7, 8, 9, 10]
+
+-- /= means not equals
+> filter (/= ' ') "abc def ghi"
+"abcdefghi"
+```
+
+The function `filter` can be defined using recursion.
+
+```haskell
+filter :: (a -> Bool) -> [a] -> [a]
+filter p [] = []
+filter p (x:xs) | p x = x : filter p xs
+                | otherwise = filter p xs
+```
+
+Other `higher-order functions` for processig lists that are defined in the standard prelude.
+
+```haskell
+-- Decides if all elements of a list satisfy a predicate
+> all even [2, 4, 6, 8]
+True
+
+-- Decide if any element of a list satifies a predicate
+> any odd [2, 4, 6, 8]
+False
+
+-- Select elements from a list while they satisfy a predicate
+> takeWhile even [2, 4, 6, 7, 8]
+[2, 4, 6]
+
+-- 
+> dropWhile odd [1, 3, 5, 6, 7]
+[6, 7]
 ```
 
