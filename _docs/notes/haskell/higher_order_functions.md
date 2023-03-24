@@ -182,7 +182,7 @@ foldr f v [] = v
 foldr f v (x:xs) = f x (foldr f v xs)
 ```
 
-It is best to think of `foldr f v` in a non-recurisve manner,
+It is best to think of `foldr f v` in a non-recursive manner,
 as simply replacing each cons operator in a list by the function f, and the empty list at the end by the value v.
 
 ```haskell
