@@ -186,23 +186,40 @@ It is best to think of `foldr f v` in a non-recursive manner,
 as simply replacing each cons operator in a list by the function f, and the empty list at the end by the value v.
 
 ```haskell
--- foldr (+) 0
-1 : (2 : (3 : []))
+sum [1, 2, 3]
+= { applying sum }
+foldr (+) 0 [1, 2, 3]
+= { applying [,,] syntax }
+foldr (+) 0 (1 : (2 : (3 : [])))
+= { applying foldr }
 1 + (2 + (3 + 0))
+= { applying + }
+6
 ```
 
-`foldr` can be used to define many more functions and reflects an operator that is assumed to associate to the right.
+`foldr` can be used to define many more functions and reflects an operator that is assumed to associate to the right (`fold right`).
 
 ```haskell
 length :: [a] -> Int
 length = foldr (\_ n -> 1 + n) 0
 ```
 
-`fold right` 
+```haskell
+length [1, 2, 3]
+= { applying length }
+foldr (\_ n -> 1 + n) 0 [1, 2, 3]
+= { applying [,,] syntax }
+foldr (\_ n -> 1 + n) 0 (1 : (2 : (3 : [])))
+= { applying foldr }
+1 + (1 + (1 + 0))
+= { applying + }
+3
+```
+
 
 ### The `foldl` function
 
-It is possible to define recursive functions on lists using an operator that is assumed to associate to the left.
+It is possible to define recursive functions on lists using an operator that is assumed to associate to the left (`fold left` ).
 
 ```haskell
 sum :: Num a => [a] -> a
@@ -328,4 +345,36 @@ Useful as a suitable starting point for a sequence of compositions.
 ```haskell
 compose :: [a -> a] -> (a -> a)
 compose = foldr (.) id
+```
+
+Furthermore definitions can often be written in a `point-free` notation.
+
+```haskell
+odd x = not (even x)
+<=> { Syntactic sugar }
+odd = \x -> not (even x)
+<=> { Definition of (.) }
+odd = \x -> (not . even) x
+<=> ( Eta conversion / contraction )
+odd = not . even
+```
+
+The above process uses `eta conversion / contraction`. Which denotes the following equality.
+
+```haskell
+(\x -> f x) == f
+f . g = \x -> f (g x)
+```
+
+Additionally the term `point-free` does not refer to the `.` character, but the fact that the definition does not mention the **data points** on which the functions act.
+
+Every definition has a `point-free` form that can be computed automaticall, see [PointFree.io](https://pointfree.io/) for more information.
+
+```haskell
+totalWordCount :: [String] -> Int
+totalWordCount = \strs -> foldr (+) 0 ( map length (map words strs))
+= {Definition of (.), eta conversion / contraction }
+foldr (+) 0 . map (length . words)
+= { applying "foldr f v . map g = foldr (f . g) v" }
+foldr ((+) . length . words) 0
 ```
