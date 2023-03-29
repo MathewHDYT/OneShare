@@ -201,6 +201,8 @@ foldr (+) 0 (1 : (2 : (3 : [])))
 
 ```haskell
 length :: [a] -> Int
+-- n represents the accumulator value, which is initalized to 0 by foldr
+-- and represents the count of elements seens so far in the list
 length = foldr (\_ n -> 1 + n) 0
 ```
 
@@ -219,7 +221,7 @@ foldr (\_ n -> 1 + n) 0 (1 : (2 : (3 : [])))
 
 ### The `foldl` function
 
-It is possible to define recursive functions on lists using an operator that is assumed to associate to the left (`fold left` ).
+It is possible to define recursive functions on lists using an operator that is assumed to associate to the left (`fold left`).
 
 ```haskell
 sum :: Num a => [a] -> a
