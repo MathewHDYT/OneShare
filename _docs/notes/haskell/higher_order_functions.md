@@ -201,7 +201,7 @@ foldr (+) 0 (1 : (2 : (3 : [])))
 
 ```haskell
 length :: [a] -> Int
--- n represents the accumulator value, which is initalized to 0 by foldr
+-- n represents the accumulator value v, which is initalized to 0 by foldr
 -- and represents the count of elements seens so far in the list
 length = foldr (\_ n -> 1 + n) 0
 ```
@@ -303,7 +303,7 @@ foldl f v [] = v
 foldl f v (x:xs) = foldl f (f v x) xs
 ```
 
-It is best to think of `foldl f v` in a non-recurisve manner.
+It is best to think of `foldl f v` in a non-recursive manner.
 In terms of an operator `#` that is assumed to associate to the left.
 
 ### The composition operator
@@ -349,7 +349,7 @@ compose :: [a -> a] -> (a -> a)
 compose = foldr (.) id
 ```
 
-Furthermore definitions can often be written in a `point-free` notation.
+Furthermore, definitions can often be written in a `point-free` notation.
 
 ```haskell
 odd x = not (even x)
@@ -368,9 +368,9 @@ The above process uses `eta conversion / contraction`. Which denotes the followi
 f . g = \x -> f (g x)
 ```
 
-Additionally the term `point-free` does not refer to the `.` character, but the fact that the definition does not mention the **data points** on which the functions act.
+Additionally, the term `point-free` does not refer to the `.` character, but the fact that the definition does not mention the **data points** on which the functions act.
 
-Every definition has a `point-free` form that can be computed automaticall, see [PointFree.io](https://pointfree.io/) for more information.
+Every definition has a `point-free` form that can be computed automatically, see [PointFree.io](https://pointfree.io/) for more information.
 
 ```haskell
 totalWordCount :: [String] -> Int
