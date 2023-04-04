@@ -240,7 +240,23 @@ Functions that are written between their two arguments (`+`, `*`, ...) are calle
 Any function with two arguments can be converted into a `operator` by enclosing the name of the function in a single back quote `\``.
 
 The opposite is possible as well any `operator` can be converted into a `curried function` by enclosing the name of the `operator` in parentheses `()`.
+
+```haskell
+-- Prefix notation is used for function application
+max 7 2
+
+-- Infix notation can be done using operators (+)
+7 + 2
+
+-- Functions can be converted into operators using backticks
+7 `div` 2
+
+-- Operators can be converted into functions using brackets
+(+) 7 2
+```
+
 Moreover, this also allows one of the arguments to be included in the parentheses if desired (`(1 +) 2`, `(+ 2) 1`).
+
 In general this also allows the expressions of the form `(#)`, `(x #)`, and `(# y)`, for arguments `x` and `y` are called `sections`.
 
 ```haskell

@@ -59,6 +59,8 @@ data Bool = False | True
 
 The symbol `|` is read as `or`, and the new values of the type are called `constructors`.
 
+The `data` mechanism functions very similarly to the `enum` in other programming languages.
+
 As with new types, the names of `constructors` must begin with capital letters and the same constructors cannot be used in more than one type.
 
 Values of new types can be used on the same way as those of built-in types.
@@ -85,6 +87,22 @@ rev North = South
 rev South = North
 rev East = West
 rev West = East
+```
+
+New custom data types are defined by declaring new types and functions that returns values of those types called `data constructors` or `constructors`.
+
+```haskell
+data Bool = False | True
+-- >>> :t True
+-- True :: Bool
+-- >>> :t False
+-- False :: Bool
+
+data List a = Nil | Cons a (List a)
+-- >>> :t Nil
+-- Nil :: List a
+-- >>> :t Cons
+-- Cons :: a -> List a -> List a
 ```
 
 The `constructors` in a data declaration can also have arguments.
@@ -143,6 +161,64 @@ safehead [] = Nothing
 safehead xs = Just (head xs)
 ```
 
+### Type Constructors and Kinds
+
+`Maybe` and `Pair` are not really types in the normal sense. There is a difference between them and types like `Bool` or `Int`.
+
+```haskell
+data Maybe a = Nothing | Just a
+type Pair a = (a, a)
+```
+
+We can provide concrete values of the types `Bool` or `Int`, this however is not possible for `Maybe` and `Pair`.
+
+It is only possilbe to provide concrete values for full `instantiated types`, such as `Maybe Bool` or `Pair Int`.
+
+`Maybe` and `Pair` are so called `Type Constructors` since they constructo one type from another.
+
+This behaviour is expressed using `kinds`. A `kind` is the type of a `"type"`.
+
+```haskell
+K ::= * | K -> K
+-- *: Pronounced "type" or "start". Kind of ordinary / proper / concrete / baisc types
+-- K -> K: Kind of "type constructors" or "type operators"
+```
+
+The `kind` can be displayed in GHCi using the `:k` command.
+
+```haskell
+data [] a = [] | a : [] a
+> :k []
+[] :: * -> *
+
+data Either a b = Left a | Right b
+> :k Either
+Either :: * -> * -> *
+```
+
+| Type | Value | Kind |
+| ---- | ----- | ---- |
+| `Bool` | `True` | * |
+| `Char` | `'a'` | * |
+| `[a]-> [a]` | `reverse` | * |
+| `Maybe Char` | `Just 'a'` | * |
+| `a -> Maybe a` | `Just` | * |
+| `Maybe` | - | * -> * |
+| `(,)` | - | * -> * -> * |
+| `Bool -> Bool` | `not` | * |
+| `(->) Bool Bool` | `not` | * |
+| `(->)` | - | * -> * -> * |
+| `(->) Bool` | - | * -> * |
+| `(->) a` | - | * -> * |
+
+Only types of `kind` * can have a value.
+
+`Types` are used to prevent the user from making errors at the *value level*, whereas `kinds` are used to prevent the user form making errors at the *type level*.
+
+Not all type expression make sense an instnace of a type class must hae the same `kind` as its class definition.
+
+The `a` in `Eq a` must have `kind` *. Therefore it is not possible to make `Maybe` an instance of `Eq`.
+
 ### Newtype declarations
 
 If a new type has a single constructor with a single argument, it can be declared using the `newtype` mechanism.
@@ -155,9 +231,71 @@ data Nat = N Int
 
 Using `newtype` rather than `type` means that `Nat` and `Int` are different types rather than synonyms.
 
-Meaning they cannot accidentally be mixed up and `newtype` rather than `data` is more efficient, because `newtype` constructors such as `N` do no incur nay cost when the program is evaluated.
+Meaning they cannot accidentally be mixed up and `newtype` rather than `data` is more efficient, because `newtype` constructors such as `N` do no incur any cost when the program is evaluated. So called `zero-cost abstraction`.
 
-This is possible because the y are removed by the compiler once type checking is completed.
+This is possible because they are removed by the compiler once type checking is completed.
+
+### Records
+
+Convenient syntax when data constructors have multiple parameters
+
+```haskell
+data Person = Person
+    { name :: String
+    , age :: Int
+    , children :: [Person]
+    } deriving (Show)
+
+-- Is equivavlent too
+
+data Person = Person String Int [Person]
+              deriving (Show)
+
+-- Selector functions
+name :: Person -> String
+name (Person n _ _) = n
+
+age :: Person -> Int
+age (Person _ a _) = a
+
+children :: Person -> [Person]
+children (Person _ _ c) = c
+```
+
+This behaviour is more than just syntactic sugar.
+
+```haskell
+alice :: Person
+alice = Person "Alice" 5 []
+
+bob :: Person
+bob = Person {name = "Bob", age = 35, children = [alice]}
+-- Construction using field labels
+
+-- >>> alice
+-- >>> bob
+-- Person {name = "Alice", age = 5, children = []}
+-- Person {name = "Bob", age = 35,
+--         children = [Person {name = "Alice", age = 5, children = []}]
+-- }
+-- Derived show contains labels
+
+-- >>> alice {age = age alice + 1}
+-- Person {name = "Alice", age = 6, children = []}
+-- Updates using field labels
+```
+
+### Modules
+
+The main goals of modules are:
+- *Organising* programs into multiple files / namespaces
+- *Defining visiblity*
+
+and they are:
+- A collection of related values, types, classes, etc.
+- Name: identifier that starts with a capital letter
+- Naming convention for hierarchy: seperated using `'.'` (e.g. `Data.List`, `Data.List.NonEmpty`, `Data.Set`, ...)
+- Each module `Dir.Name` must be contained in a file `Dir\Name.hs`
 
 ### Recursive types
 
@@ -278,6 +416,18 @@ data Tree a b = Leaf a | Node (Tree a b) b (Tree a b)
 
 data Tree a = Node a [Tree a]
 -- Tree with a list of subtrees, Node with empty list of subtrees can play role of a leaf
+```
+
+### Polymorphism
+
+The term `polymorphism` is used to denote a number of fundamentelly different variants.
+- *Ad-hoc Polymorphism*: Function with the same name denotes different implementations (function overloading, Interfaces)
+- *Parametric Polymorphism*: Code written to work with many possible types (Object-Oriented: Generics)
+- *Subtype Polymorphism*: One type (subtype) can be substitued for another (supertype)
+
+```haskell
+-- Parametric Polymorphism, (a is generic)
+data Tree a = Leaf | Node (Tree a) a (Tree a)
 ```
 
 ### Class and instance declarations
