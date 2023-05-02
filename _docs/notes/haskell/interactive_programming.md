@@ -138,3 +138,21 @@ strlen = do putStr "Enter a string: "
 Enter a string: Haskell is a good programming language
 The string has 38 characters
 ```
+
+### Composing `IO` actions
+
+It is possible to define an operator, that can be used to compose two `IO` actions into one `IO` action.
+
+```haskell
+-- Non composed
+do x <- getChar
+   putChar x
+
+-- Composed
+getChar (>>=) (\x -> putChar x)
+(>>=) :: IO Char -> (Char -> IO ()) -> IO ()
+-- Making types more general
+(>>=) :: IO a -> (a -> IO b) -> IO b
+(>>=) :: m a -> (a -> m b) -> m b
+```
+
