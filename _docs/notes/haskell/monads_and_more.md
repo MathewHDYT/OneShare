@@ -168,4 +168,59 @@ There is at most one function `fmap` that satisfies the required laws. If it is 
 
 ### Applicatives
 
+Are examples of generalize the idea of `Functors` to allow any functions with any number of arguments to be mapped, rather than being restricted to functions with a single argument.
+We can use the notion of currying to achieve this.
+
+```haskell
+-- Converts a value of type a into a structore of type f a
+pure :: a -> f a
+-- Generalised form of function application, where argument function / value and the result valie are allc ontained in f structures
+(<*>) :: f (a -> b) -> f a -> f b
+-- Assumed to associate to the left
+g <*> x <*> y <*> z
+((g <*> x) <*> y) <*> z
+```
+
+A typical use of `pure` and `<*>` has the following form.
+
+```haskell
+pure g <*> x1 <*> x2 <*> ... <*> xn
+```
+
+Such expressions are in `applicative style`, because of the similarity to normal function application notation `g x1 x2 ... xn`.
+Where in both cases `g` is a curried function that takes `n` arguments of type `a1 ... an` and produces a result of type `b`.
+
+In `applicative style`, each argument `xi` has type `f ai` rather than just `ai` and the overall result has type `f b` rather than `b`.
+Using this idea we can define the hierarchy of mapping functions.
+
+```haskell
+-- Degenerate case when function being mapped has no argument
+fmap0 :: a -> f a
+fmap0 = pure
+
+-- Another name for fmap
+fmap1 :: (a -> b) -> f a -> f b
+fmap1 g x = pure g <*> x
+
+fmap2 :: (a -> b -> c) -> f a -> f b
+fmap1 g x y = pure g <*> x <*> y
+
+fmap3 :: (a -> b -> c -> d) -> f a -> f b -> f c -> f d
+fmap1 g x y z = pure g <*> x <*> y <*> z
+
+.
+.
+.
+```
+
+The class of `functors` that support `pure` and `<*>` functions are called `applicative functors` or short form `applicatives`.
+
+```haskell
+class Functor f => Applicative f where
+    pure :: a -> f a
+    (<*>) :: f (a- -> b) -> f a -> f b
+```
+
+#### Examples
+
 
