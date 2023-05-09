@@ -221,6 +221,104 @@ class Functor f => Applicative f where
     (<*>) :: f (a- -> b) -> f a -> f b
 ```
 
+#### Evaluation
+
+Notice the similairty between `$` and `<*>`.
+
+```haskell
+instance Applicative Maybe where
+    pure x = Just x
+    Nothing <*> _ = Nothing
+    (Just f) <*> mx = fmap f mx
+
+($) :: (a -> b) -> a -> b
+f $ x = f x
+
+(+) $ 11 $ 31
+= ((+) 11) $ 31
+= ((+) 11 31)
+= 42
+
+(<*>) :: f (a -> b) -> f a -> f b
+
+pure (+) <*> Just 11 <*> Just 31
+= Just (+) <*> Just 11 <*> Just 31
+= Just ((+) 11) <*> Just 31
+= Just ((+) 11 31)
+= Just 42
+```
+
+The following derivation illustrates how applicatives can be evaluated.
+
+```haskell
+instance Applicative [] where
+-- pure :: a -> [a]
+-- (<*>) :: [a -> b] -> [a] -> [b]
+    pure x = [x]
+    fs <*> xs = [f x | f <- fs, x <- xs]
+
+pure (+) <*> [1, 2] <*> [3, 4]
+= [(+)] <*> [1, 2] <*> [3, 4]
+= [(+) 1, (+) 2] <*> [3, 4]
+= [(+) 1 3, (+) 1 4, (+) 2 3, (+) 2 4]
+= [4, 5, 5, 6]
+```
+
 #### Examples
 
+### Monads
 
+#### Evaluation
+
+The following derivation illustrates how monads can be evaluated.
+
+```haskell
+instance Monad Maybe where
+-- (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
+Nothing >>= _
+ = Nothing
+(Just x) >>= f = f x
+
+safediv :: Int -> Int -> Maybe Int
+safediv _ 0 = Nothing
+safediv l r = Just (l `div` r)
+
+do n <- pure 10
+   m <- pure 2
+   safediv n m
+= pure 10 >>= (\n -> (pure 2 >>= (\m -> safediv n m))) -- (do syntax with explicit λ parentheses)
+= Just 10 >>= (\n -> (pure 2 >>= (\m -> safediv n m))) -- (definition of pure)
+= (\n -> (pure 2 >>= (\m -> safediv n m))) 10
+ -- (definition of >>=)
+= pure 2 >>= (\m -> safediv 10 m) -- (function application)
+= Just 2 >>= (\m -> safediv 10 m) -- (definition of pure)
+= (\m -> safediv 10 m) 2 -- (definition of >>=)
+= safediv 10 2 -- (function application)
+= Just (10 `div` 2) -- (definition of safediv)
+= Just 5 -- (definition of div)
+```
+
+### Overview
+
+| | **APPLICATION OPERATOR** | **TYPE OF APPLICATION OPERATOR** | **FUNCTION** | **ARGUMENT** | **RESULT** |
+| --- | --- | --- | --- | --- | --- |
+| Pure function application | `juxtapose`, `($)` | `(a -> b) -> a -> b` | pure | pure | pure |
+| Functor | `fmap`, `(<$>)` | `(a -> b) -> f a -> f b` | pure | effectual | effectual |
+| Applicative functor | `(<*>)` | `f (a -> b) -> f a -> f b` | pure | effectual | effectual |
+| Monad | `(>>=)` | `m a -> (a -> m b) -> m b` | effectual | effectual | effectual |
+
+### Defining Applicatives and Functors in terms of Monads
+
+This is possible, since all monads are applicative functors which in turn are all functors. See this [StackOverflow thread](https://stackoverflow.com/questions/19635265/is-it-better-to-define-functor-in-terms-of-applicative-in-terms-of-monad-or-vic) for more information.
+
+```haskell
+instance Applicative MyMonadType where
+    pure = return
+    mf <*> mx = do
+    f <- mf
+    x <- mx
+    return (f x)
+
+instance Functor MyApplicativeType where
+    fmap = fmap f x = pure f <*> x
+```
