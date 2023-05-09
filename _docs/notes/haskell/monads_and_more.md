@@ -221,16 +221,60 @@ class Functor f => Applicative f where
     (<*>) :: f (a- -> b) -> f a -> f b
 ```
 
-#### Evaluation
+#### Examples
 
-Notice the similairty between `$` and `<*>`.
+Hence, `Maybe` is a functor and therefore supports `fmap`. It is straightforward to make this type into an applicative functor
 
 ```haskell
 instance Applicative Maybe where
-    pure x = Just x
+    -- pure :: a -> Maybe a
+    pure = Just
+    -- (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
     Nothing <*> _ = Nothing
-    (Just f) <*> mx = fmap f mx
+    (Just g) <*> mx = fmap g mx
+```
 
+The function `pure` transforms a value into a successful result, while the operator `<*>` applies a function that may fail to an argument that produces a result that may fail.
+
+```haskell
+> pure (+ 1) <*> Just 1
+Just 2
+
+> pure (+) <*> Just 1 <*> Just 2
+Just 3
+
+> pure (+) <*> Nothing <*> Just 2
+Nothing
+```
+
+In this manner, the applicative style `Maybe` supports a form of `exceptional` programming (applying pure function to argument that may fail) without the need to manage the propagation of failures ourselves.
+
+```haskell
+instance Applicative [] where
+    -- pure :: a -> [a]
+    pure x = [x]
+    -- (<*>) :: [a -> b] -> [a] -> [b]
+    gs <*> xs = [g x | g <- gs, x <- xs]
+```
+
+The function `pure` transform a value into a `singleton list`, while `<*>` takes a list of functions and a list of arguments and applies each function to each argument in turn.
+
+```haskell
+> pure (+ 1) <*> [1, 2, 3]
+[2, 3, 4]
+
+> pure (+) <*> [1] <*> [2]
+[3]
+
+> pure (*) <*> [1, 2] <*> [3, 4]
+[3, 4, 6, 8]
+```
+
+#### Evaluation
+
+Notice the similarity between `$` and `<*>`.
+
+```haskell
 ($) :: (a -> b) -> a -> b
 f $ x = f x
 
@@ -251,20 +295,12 @@ pure (+) <*> Just 11 <*> Just 31
 The following derivation illustrates how applicatives can be evaluated.
 
 ```haskell
-instance Applicative [] where
--- pure :: a -> [a]
--- (<*>) :: [a -> b] -> [a] -> [b]
-    pure x = [x]
-    fs <*> xs = [f x | f <- fs, x <- xs]
-
 pure (+) <*> [1, 2] <*> [3, 4]
 = [(+)] <*> [1, 2] <*> [3, 4]
 = [(+) 1, (+) 2] <*> [3, 4]
 = [(+) 1 3, (+) 1 4, (+) 2 3, (+) 2 4]
 = [4, 5, 5, 6]
 ```
-
-#### Examples
 
 ### Monads
 
@@ -274,10 +310,9 @@ The following derivation illustrates how monads can be evaluated.
 
 ```haskell
 instance Monad Maybe where
--- (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
-Nothing >>= _
- = Nothing
-(Just x) >>= f = f x
+    -- (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
+    Nothing >>= _ = Nothing
+    (Just x) >>= f = f x
 
 safediv :: Int -> Int -> Maybe Int
 safediv _ 0 = Nothing
