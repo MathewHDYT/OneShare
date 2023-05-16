@@ -349,6 +349,27 @@ do n <- pure 10
 = Just 5 -- (definition of div)
 ```
 
+#### Kleisli Arrow `(<=<)`
+
+Is analagous to normal function application, exepct that it works on monadic functions.
+
+```haskell
+(.) :: (b -> c) -> (a -> b) -> a -> c
+(<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
+(f <=< g) x = g x >>= f 
+```
+
+Monad type class laws expressed in terms of the Kleisli arrows.
+
+```haskell
+-- Left identity
+return <=< f == f
+-- Right identity
+f <=< return == f
+-- Associativity
+(f <=< g) <=< h == f <=< (g <=< h)
+```
+
 ### Overview
 
 | | **APPLICATION OPERATOR** | **TYPE OF APPLICATION OPERATOR** | **FUNCTION** | **ARGUMENT** | **RESULT** |
