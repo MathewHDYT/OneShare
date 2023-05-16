@@ -268,6 +268,22 @@ pure (+) <*> [1, 2] <*> [3, 4]
 
 ### Monads
 
+### Composing `Maybe`effects
+
+The following code defines and operator `(>>=)` that we can use to compose two `Maybe` effects into one.
+
+```haskell
+(>>=) :: Maybe Int -> (Int -> Maybe Int) -> Maybe Int
+safediv 8 2 (>>=) (\x -> safediv n 2)
+```
+
+More generally the type is.
+
+```haskell
+(>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
+(>>=) :: m a -> (a -> m b) -> m b
+```
+
 #### Evaluation
 
 The following derivation illustrates how monads can be evaluated.
