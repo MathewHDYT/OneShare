@@ -247,7 +247,7 @@ Just 3
 Nothing
 ```
 
-In this manner, the applicative style `Maybe` supports a form of `exceptional` programming (applying pure function to argument that may fail) without the need to manage the propagation of failures ourselves.
+In this manner, the applicative style `Maybe` supports a form of `exceptional` programming, applying pure function to argument that may fail, without the need to manage the propagation of failures ourselves.
 
 ```haskell
 instance Applicative [] where
@@ -268,6 +268,84 @@ The function `pure` transform a value into a `singleton list`, while `<*>` takes
 
 > pure (*) <*> [1, 2] <*> [3, 4]
 [3, 4, 6, 8]
+```
+
+They key to view the type `[a]` as a generalization of `Maybe a` that permits multiple results in the case of success.
+More precisely, the empty lists can be though of as representing failure, and a non-empty lists as representing all the possible ways in which a result may succeed.
+
+Hence, in the last example there are two possible values for the first argument `[1, 2]` and two possible values for the second one `[3, 4]`.
+Which gives four possible results for the multiplication `[3, 4, 6, 8]`.
+
+```haskell
+prods :: [Int] -> [Int] -> [Int]
+prods xs ys = [x * y | x <- xs, y <- ys]
+
+-- Applicative definition, avoids naming intermediate results
+prods' :: [Int] -> [Int] -> [Int]
+prods' xs ys = pure (*) <*> xs <*> ys
+```
+
+Applicative style for list supports a form of `non-deterministic` programming in which we can apply pure functions to multivalued arguments without the need to manage selection of values or propagation of failure.
+
+```haskell
+instance Applicative IO where
+    -- pure :: a -> IO a
+    pure = return
+    -- (<*>) :: IO (a -> b) -> IO a -> IO b
+    mg <*> mx = do {g <- mg; x <- mx; return (g x)}
+```
+
+Here the function `pure` is given by the `return` function for the `IO` type, and `<*>` applies an impure function to an impure argument and gives an impure result.
+
+```haskell
+getChars :: Int -> IO String
+getChars 0 = return []
+getChars n = pure (:) <*> getChar <*> getChars (n - 1)
+```
+
+In the base case we simply return the empty list, and in the recursive case we apply the cons operator to the result of reading the first character and the remaining list of characters.
+Applicative style for `IO` supports a form of `interactive` programming in which we can apply pure functions to impure arguments without the need to manage the sequencing of actions or the extraction of result values.
+
+#### Effectful programming
+
+The common theme between all `Applicative` instances is that they all concert programming with `effects`.
+In each case, the instance provides an operator `<*>` that allows us to write programs in a familiar application style in which functions are applied to arguments, with one key difference:
+the arguments are no longer just plain values but may also have effects (`Maybe`, `IO`, `[]`).
+
+```haskell
+sequenceA :: Applicative f => [f a] -> f [a]
+sequenceA [] = pure []
+sequenceA (x:xs) = pure (:) <*> x <*> sequenceA xs
+```
+
+Transforms a list of applicative actions into a single such action that returns a list of result values and captures a common pattern of applicative programming.
+
+```haskell
+getChars :: Int -> IO String
+getChars = sequenceA (replicate n getChar)
+```
+
+#### Applicative laws
+
+In addition to providing the function `pure` and `<*>`, applicative functors are also required to satisfy four equational laws.
+
+```haskell
+pure id <*> x = x
+pure (g x) = pure g <*> pure x
+x <*> pure y = pure (\g -> g y) <*> x
+x <*> (y <*> z) = (pure (.) <*> x <*> y) <*> z
+```
+
+1. `pure` preserves the identity function, applying `pure` to a function returns an applicative version of the `id` function
+2. `pure` preserves function application, applying `pure` over normal function application results in an applicative application
+3. When applying effectful function `<*>` to a pure argument the order of evaluation does not matter
+4. `<*>` is associative, meaning rearranging the order does not influence the result
+
+There also exits an infix version of `fmap`, defined by `g <$> x = fmap g x`, which allows for a different formulation of applicative style.
+
+```haskell
+pure g <*> x1 <*> x2 <*> ... <*> xn
+g <$> x1 <*> x2 <*> ... <*> xn
 ```
 
 #### Evaluation
@@ -303,6 +381,59 @@ pure (+) <*> [1, 2] <*> [3, 4]
 ```
 
 ### Monads
+
+Type of expressions that are built up from integer values using a division operator.
+
+```haskell
+data Expr = Val Int | Div Expr Expr
+
+eval :: Expr -> Int
+eval (Val n) = n
+eval (Div x y) = eval x `div` eval y
+```
+
+However, this function does not take the possibility of division by zero in account, and will produce an error.
+
+```haskell
+> eval (Div (Val 1) (Val 0))
+*** Exception: divide by zero
+```
+
+To address this the `Maybe` type to define a safe version of division that returns `Nothing` when the second argument is zero can be used.
+
+```haskell
+safediv :: Int -> Int -> Maybe Int
+safediv _ 0 = Nothing
+safediv n m = Just (n `div` m)
+```
+
+Then we can modify our evaluator to explicitly handle the possibility of failure.
+
+```haskell
+eval :: Expr -> Maybe Int
+eval (Val n) = Just n
+eval (Div x y) = case eval x of
+                    Nothing -> Nothing
+                    Just n -> case eval y of
+                                Nothing -> Nothing
+                                Just m -> safediv n m
+
+> eval (Div (Val 1) (Val 0))
+Nothing
+```
+
+This resolved the division by zero issue, but is rather verbose.
+To mitigate that we can use the fact that `Maybe` is applicative and redefine `eval` in an applicative style.
+
+```haskell
+eval :: Expr -> Maybe Int
+eval (Val n) = pure n
+eval (Div x y) = pure safediv <*> eval x <*> eval y
+```
+
+However, this definition is not type correct. Because the function `safediv` has type `Int -> Int -> Maybe Int`, whereas in the above context a function of type `Int -> Int -> Int` is required.
+
+Replacing `pure safediv` by a custom defined function would not help either because this function would need to have type `Maybe (Int -> Int -> Int)`, which does not provide any means to indicate failure, when the second argument is zero.
 
 ### Composing `Maybe`effects
 
