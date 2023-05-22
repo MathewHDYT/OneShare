@@ -590,11 +590,6 @@ More generally the type is.
 The following derivation illustrates how monads can be evaluated.
 
 ```haskell
-instance Monad Maybe where
-    -- (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
-    Nothing >>= _ = Nothing
-    (Just x) >>= f = f x
-
 safediv :: Int -> Int -> Maybe Int
 safediv _ 0 = Nothing
 safediv l r = Just (l `div` r)
