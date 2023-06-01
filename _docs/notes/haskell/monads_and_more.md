@@ -50,7 +50,7 @@ class Functor f where
 ```
 
 For a parameterized type `f` to be an instance of the class `Functor`, it must support a function `fmap` of the given type.
-Meaning `fmap` takes a function of type `a -> b` and a structure of type `f a`, whose elements have type `a` sometimes called `container type,` and applies the function to each element to give a structure of type `f b` whose elements now have type `b`.
+Meaning `fmap` takes a function of type `a -> b` and a structure of type `f a` then it applies the function to each element to give a structure of type `f b`.
 
 ```haskell
 instance Functor [] where
