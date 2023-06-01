@@ -174,13 +174,14 @@ We can use the notion of currying to achieve this.
 ```haskell
 -- Converts a value of type a into a structore of type f a
 pure :: a -> f a
--- Generalised form of function application, where argument function / value and the result valie are allc ontained in f structures
+-- Generalised form of function application,
+-- where argument function / value and the result value are all contained in f structures
 (<*>) :: f (a -> b) -> f a -> f b
 -- Assumed to associate to the left
 g <*> x <*> y <*> z
 ((g <*> x) <*> y) <*> z
 ```
-
+ 
 A typical use of `pure` and `<*>` has the following form.
 
 ```haskell
