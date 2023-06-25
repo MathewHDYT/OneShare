@@ -26,7 +26,7 @@ type IO a = World -> (a, World)
 Expressions of type `IO a` are called *actions*.
 
 `IO ()` is the type of *actions* that returns the empty tuple `()` as a dummy result value
-and can be though of as purely side-effecting actions that return no result value.
+and can be thought of as purely side-effecting actions that return no result value.
 
 In addition to returning a result value, interactive programs may also require argument values.
 This can be achieved using the notion of `currying`.
