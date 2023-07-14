@@ -15,7 +15,7 @@ Easiest way to define a new function is to use already existing ones.
 
 ```haskell
 even :: Integral a => a -> Bool
-even n = n `div` 2 == 0
+even n = n `mod` 2 == 0
 
 splitAt :: Int -> [a] -> ([a]. [a])
 splitAt n xs = (take n xs, drop n xs)

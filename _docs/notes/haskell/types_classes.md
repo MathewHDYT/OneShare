@@ -46,8 +46,8 @@ These types are checked before the evaluation, therefore Haskell programs are *t
 `String`             | Strings of characters | Contains all sequences of characters and the empty string `""`. Enclosed in double quotes `" "` |
 `Int`                | Fixed-precision integers | Contains integers, with a fixed amount of memory being used for storage. `GHC` range -2^63 - 2^63 - 1 |
 `Integer`            | Arbitrary-precision integers | Contains integers with as much memory as necessary being used for storage |
-`Float`            | Single-precision floating-point numbers | Contains numbers with decimal point, with fixed amount of memory being used for storage. Digits permitted after decimal point depends upon size of the number (7 total digits) |
-`Integer`            | Double-precision floating-point numbers | Similar to `Float`, except twice as much memory is used to increase precision (14 total digits) |
+`Float`              | Single-precision floating-point numbers | Contains numbers with decimal point, with fixed amount of memory being used for storage. Digits permitted after decimal point depends upon size of the number (7 total digits) |
+`Double`             | Double-precision floating-point numbers | Similar to `Float`, except twice as much memory is used to increase precision (14 total digits) |
 
 ### List types
 
@@ -206,7 +206,7 @@ Types that are instances of the `Eq` class and in addition whose values are tota
 ```haskell
 (<) :: a -> a -> Bool
 (<=) :: a -> a -> Bool
-(>) :: a -> -> Bool
+(>) :: a -> a -> Bool
 (>=) :: a -> a -> Bool
 min :: a -> a -> a
 max :: a -> a -> a
@@ -244,7 +244,7 @@ Types whose values are numeric.
 ```haskell
 (+) :: a -> a -> a
 (-) :: a -> a -> a
-(*) :: a -> -> a
+(*) :: a -> a -> a
 negate :: a -> a
 abs :: a -> a
 signum :: a -> a
